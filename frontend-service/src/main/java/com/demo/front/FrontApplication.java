@@ -25,9 +25,11 @@ public class FrontApplication {
         SpringApplication.run(FrontApplication.class, args);
     }
 
+    public static final String API_PATH = "/api";
+
     @Slf4j
     @RestController
-    @RequestMapping("api")
+    @RequestMapping(API_PATH)
     static public class FrontEndController {
         private List rockets = new ArrayList();
 
