@@ -31,7 +31,6 @@
         <mdb-card-title>
           <h4>Launch new rocket</h4>
         </mdb-card-title>
-    
         <!--Text-->
         <mdb-card-text> Remember about authentication. Follow changes on the list to see which pod processed request.
         </mdb-card-text>
@@ -39,16 +38,21 @@
             <div class="input-group-prepend">
               <span class="input-group-text md-addon" id="inputGroupMaterial-sizing-sm">user:</span>
             </div>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-sm">
+            <input type="text" [(ngModel)]="user" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-sm">
           </div>
           
           <div class="md-form input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text md-addon" id="inputGroupMaterial-sizing-default">pass:</span>
             </div>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-default">
+            <input type="text" [(ngModel)]="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroupMaterial-sizing-default">
           </div>
-    
+          <div #alert class="alert alert-warning alert-dismissible fade" role="alert">
+            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            Sth went wrong :(
+          </div>
         <a href="#" mdbBtn color="primary" class="btn-block" mdbWavesEffect (click)="startRocket()">START</a>
       </mdb-card-body>
     </mdb-card>
