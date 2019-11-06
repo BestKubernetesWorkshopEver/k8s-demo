@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -27,13 +28,15 @@ export class AppComponent {
       }
     
     this.alert.nativeElement.classList.remove('show');
-    this.http.get<Rocket[]>('api', httpOptions).subscribe(
+    this.http.post<Rocket>('api', null, httpOptions).subscribe(rocket=> 
+      this.http.get<Rocket[]>('api', httpOptions).subscribe(
       rockets => {
                 this.rockets=rockets.reverse();
-                }, 
+                }
+      ),
       error => { console.log('Error happend');
                 this.alert.nativeElement.classList.add('show');
-                });
+                });    
   }
 
   closeAlert() {

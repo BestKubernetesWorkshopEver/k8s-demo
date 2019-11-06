@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,9 +41,9 @@ public class BackendApplication {
             return mongoTemplate.findAll(Rocket.class);
         }
 
-        @PutMapping
+        @PostMapping
         @ResponseBody
-        public Rocket put() throws UnknownHostException {
+        public Rocket post() throws UnknownHostException {
             log.info("Building new rocket");
             Rocket rocket = Rocket.builder()
                     .id(UUID.randomUUID().toString())
