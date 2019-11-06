@@ -31,7 +31,6 @@ public class FrontApplication {
     @RestController
     @RequestMapping(API_PATH)
     static public class FrontEndController {
-        private List rockets = new ArrayList();
 
         @Autowired
         private BackendService service;
