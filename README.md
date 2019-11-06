@@ -15,5 +15,5 @@ To star the application run following commands:
 
 * start backend jar
 
-``backend-service/target/backend-service-0.0.1-SNAPSHOT.jar``
+``java -jar backend-service/target/backend-service-0.0.1-SNAPSHOT.jar``
 
