@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: k8sworkshopharman/backend-service:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    run: backend-service
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 31111
+      protocol: TCP
+      name: http
+  selector:
+    app: backend
