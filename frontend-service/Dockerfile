@@ -6,10 +6,11 @@ COPY frontend /usr/src/app/frontend
 WORKDIR /usr/src/app
 RUN mvn clean package
 
-FROM azul/zulu-openjdk:11.0.3
+FROM azul/zulu-openjdk-alpine:11.0.5
 VOLUME /tmp
 ARG JAR_FILE
 COPY --from=build /usr/src/app/target/${JAR_FILE} target
+COPY --from=build /usr/src/app/static static
 
 CMD ls -latr
 ENTRYPOINT exec java $JAVA_OPTS -jar /target/frontend-service.jar
