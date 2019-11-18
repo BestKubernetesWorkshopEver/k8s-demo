@@ -44,12 +44,12 @@ public class BackendApplication {
         @PostMapping
         @ResponseBody
         public Rocket post() throws UnknownHostException {
-            log.info("Building new rocket");
             Rocket rocket = Rocket.builder()
                     .id(UUID.randomUUID().toString())
                     .host(InetAddress.getLocalHost().getHostName())
                     .timestamp(LocalDateTime.now())
                     .build();
+            log.info("Building new rocket {}", rocket);
             return mongoTemplate.save(rocket);
         }
     }
