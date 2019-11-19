@@ -33,6 +33,9 @@ spec:
             timeoutSeconds: 1
             periodSeconds: 10
             failureThreshold: 3
+          env:
+            - name: spring.data.mongodb.host
+              value: mongodb-service.default.svc.cluster.local
           ports:
             - containerPort: 8080
 ---

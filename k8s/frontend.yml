@@ -17,7 +17,6 @@ spec:
       containers:
         - name: frontend
           image: k8sworkshopharman/frontend-service:latest
-          imagePullPolicy: Always
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -34,6 +33,11 @@ spec:
             timeoutSeconds: 1
             periodSeconds: 10
             failureThreshold: 3
+          env:
+            - name: backend.url
+              value: backend-service.default.svc.cluster.local
+            - name: backend.port
+              value: "8080"
           ports:
             - containerPort: 8080
 ---
