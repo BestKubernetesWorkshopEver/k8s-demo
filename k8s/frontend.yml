@@ -38,6 +38,16 @@ spec:
               value: backend-service.default.svc.cluster.local
             - name: backend.port
               value: "8080"
+            - name: workshop.username
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-configmap
+                  key: username
+            - name: workshop.password
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-configmap
+                  key: password
           ports:
             - containerPort: 8080
 ---
@@ -48,11 +58,16 @@ metadata:
   labels:
     run: frontend-service
 spec:
-  type: NodePort
-  ports:
-    - port: 8888
-      nodePort: 31110
-      protocol: TCP
-      name: http
   selector:
     app: frontend
+  ports:
+    - protocol: TCP
+      port: 8888
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-configmap
+data:
+  username: astronaut
+  password: moon

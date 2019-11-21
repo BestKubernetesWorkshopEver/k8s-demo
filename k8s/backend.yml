@@ -46,11 +46,8 @@ metadata:
   labels:
     run: backend-service
 spec:
-  type: NodePort
-  ports:
-    - port: 8080
-      nodePort: 31111
-      protocol: TCP
-      name: http
   selector:
     app: backend
+  ports:
+    - protocol: TCP
+      port: 8080
