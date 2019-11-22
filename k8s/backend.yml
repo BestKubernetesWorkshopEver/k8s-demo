@@ -19,6 +19,8 @@ spec:
           image: k8sworkshopharman/backend-service:latest
           resources:
             limits:
+              memory: "384Mi"
+            requests:
               memory: "256Mi"
           readinessProbe:
             httpGet:
@@ -40,7 +42,7 @@ spec:
             - name: spring.data.mongodb.host
               value: mongodb-service.default.svc.cluster.local
             - name: JAVA_OPTS
-              value: "-Xmx200m -Xms64m -Xss256k"
+              value: "-Xmx256m -Xms64m -Xss256k"
           ports:
             - containerPort: 8080
 ---
