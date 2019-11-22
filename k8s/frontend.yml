@@ -17,6 +17,9 @@ spec:
       containers:
         - name: frontend
           image: k8sworkshopharman/frontend-service:latest
+          resources:
+            limits:
+              memory: "384Mi"
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -48,6 +51,8 @@ spec:
                 configMapKeyRef:
                   name: frontend-configmap
                   key: password
+            - name: JAVA_OPTS
+              value: "-Xmx256m -Xms64m -Xss256k"
           ports:
             - containerPort: 8080
 ---

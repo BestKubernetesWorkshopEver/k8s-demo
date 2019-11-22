@@ -15,15 +15,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @SpringBootApplication
 public class BackendApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
+
+        final Runtime runtime = Runtime.getRuntime();
+        final long maxMemory = runtime.maxMemory();
+        final long allocatedMemory = runtime.totalMemory();
+        final long freeMemory = runtime.freeMemory();
+        final long mb = 1024 * 1024;
+        final NumberFormat numFormat = NumberFormat.getInstance();
+
+        log.info("========================== Memory Info ==========================");
+        log.info("Free memory: {}MB", numFormat.format(freeMemory / mb));
+        log.info("Allocated memory: {}MB", numFormat.format(allocatedMemory / mb));
+        log.info("Max memory: {}MB", numFormat.format(maxMemory / mb));
+        log.info("Total free memory: {}MB", numFormat.format((freeMemory + (maxMemory - allocatedMemory)) / mb));
+        log.info("================================================================");
     }
 
     @Slf4j
@@ -45,6 +61,7 @@ public class BackendApplication {
         @ResponseBody
         public Rocket post() throws UnknownHostException {
             Rocket rocket = Rocket.builder()
+
                     .id(UUID.randomUUID().toString())
                     .host(InetAddress.getLocalHost().getHostName())
                     .timestamp(LocalDateTime.now())

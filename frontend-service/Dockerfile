@@ -1,9 +1,10 @@
 FROM maven:3.6.1-jdk-11 AS build
-COPY src /usr/src/app/src
-COPY Dockerfile /usr/src/app
-COPY pom.xml /usr/src/app
-COPY frontend /usr/src/app/frontend
 WORKDIR /usr/src/app
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+COPY src ./src
+COPY frontend ./frontend
 RUN mvn clean package
 
 FROM azul/zulu-openjdk-alpine:11.0.5
