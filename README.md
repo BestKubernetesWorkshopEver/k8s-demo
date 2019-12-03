@@ -21,5 +21,4 @@ To start the application run following commands:
 ## Run on Minikube
 `minikube start --vm-driver=hyperv --memory='4000mb' --cpus=4`  
 `kubectl apply -f k8s`  
-`kubectl port-forward svc/frontend-service 8888:8888`  
-Access on http://localhost:8888
+Access frontend at http://<minikube_ip>:30000
