@@ -16,7 +16,7 @@ public class FrontendConfiguration {
 
     @Data
     public static class Backend {
-        @JsonProperty("workshop.backend.url")
+        @JsonProperty("workshop.backend.host")
         private String url;
         @JsonProperty("workshop.backend.port")
         private int port;
@@ -24,7 +24,7 @@ public class FrontendConfiguration {
         @Override
         public String toString() {
             return
-                    " workshop.backend.url='" + url + '\'' +
+                    " workshop.backend.host='" + url + '\'' +
                             ", workshop.backend.port=" + port;
         }
     }
