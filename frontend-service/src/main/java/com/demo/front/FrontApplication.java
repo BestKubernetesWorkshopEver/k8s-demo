@@ -32,20 +32,6 @@ public class FrontApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(FrontApplication.class, args);
-
-        final Runtime runtime = Runtime.getRuntime();
-        final long maxMemory = runtime.maxMemory();
-        final long allocatedMemory = runtime.totalMemory();
-        final long freeMemory = runtime.freeMemory();
-        final long mb = 1024 * 1024;
-        final NumberFormat numFormat = NumberFormat.getInstance();
-
-        log.info("========================== Memory Info ==========================");
-        log.info("Free memory: {}MB", numFormat.format(freeMemory / mb));
-        log.info("Allocated memory: {}MB", numFormat.format(allocatedMemory / mb));
-        log.info("Max memory: {}MB", numFormat.format(maxMemory / mb));
-        log.info("Total free memory: {}MB", numFormat.format((freeMemory + (maxMemory - allocatedMemory)) / mb));
-        log.info("================================================================");
     }
 
     public static final String API_PATH = "/api";

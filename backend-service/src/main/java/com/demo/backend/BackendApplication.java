@@ -32,20 +32,6 @@ public class BackendApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
-
-        final Runtime runtime = Runtime.getRuntime();
-        final long maxMemory = runtime.maxMemory();
-        final long allocatedMemory = runtime.totalMemory();
-        final long freeMemory = runtime.freeMemory();
-        final long mb = 1024 * 1024;
-        final NumberFormat numFormat = NumberFormat.getInstance();
-
-        log.info("========================== Memory Info ==========================");
-        log.info("Free memory: {}MB", numFormat.format(freeMemory / mb));
-        log.info("Allocated memory: {}MB", numFormat.format(allocatedMemory / mb));
-        log.info("Max memory: {}MB", numFormat.format(maxMemory / mb));
-        log.info("Total free memory: {}MB", numFormat.format((freeMemory + (maxMemory - allocatedMemory)) / mb));
-        log.info("================================================================");
     }
 
     @PostConstruct
@@ -54,7 +40,6 @@ public class BackendApplication {
         log.info("========================== Backend configuration ==========================");
         log.info("{}", backendConfiguration);
         log.info("===========================================================================");
-
     }
 
 
