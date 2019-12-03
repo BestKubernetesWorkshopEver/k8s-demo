@@ -19,10 +19,10 @@ import static com.demo.front.FrontApplication.API_PATH;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${workshop.username:user}")
+    @Value("${workshop.username}")
     private String username;
 
-    @Value("${workshop.password:password}")
+    @Value("${workshop.password}")
     private String password;
 
     @Override

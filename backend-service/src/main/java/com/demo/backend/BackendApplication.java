@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.NumberFormat;
@@ -22,7 +24,11 @@ import java.util.UUID;
 
 @Slf4j
 @SpringBootApplication
+@EnableConfigurationProperties(BackendConfiguration.class)
 public class BackendApplication {
+
+    @Autowired
+    private BackendConfiguration backendConfiguration;
 
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
@@ -41,6 +47,17 @@ public class BackendApplication {
         log.info("Total free memory: {}MB", numFormat.format((freeMemory + (maxMemory - allocatedMemory)) / mb));
         log.info("================================================================");
     }
+
+    @PostConstruct
+    public void init()
+    {
+        log.info("========================== Backend configuration ==========================");
+        log.info("{}", backendConfiguration);
+        log.info("===========================================================================");
+
+    }
+
+
 
     @Slf4j
     @RestController
