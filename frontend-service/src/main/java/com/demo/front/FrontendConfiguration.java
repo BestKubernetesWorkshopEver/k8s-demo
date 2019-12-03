@@ -1,5 +1,6 @@
 package com.demo.front;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -7,13 +8,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "workshop")
 public class FrontendConfiguration {
 
+    @JsonProperty("workshop.username")
     private String username;
+    @JsonProperty("workshop.password")
     private String password;
     private Backend backend;
 
     @Data
     public static class Backend {
+        @JsonProperty("workshop.backend.url")
         private String url;
+        @JsonProperty("workshop.backend.port")
         private int port;
 
         @Override
