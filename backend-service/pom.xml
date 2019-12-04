@@ -83,7 +83,6 @@
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<version>${dockerfile-maven.version}</version>
-
 				<dependencies>
 					<dependency>
 						<groupId>javax.activation</groupId>
@@ -94,28 +93,10 @@
 				<configuration>
 					<repository>${docker.repository}/${project.artifactId}</repository>
 					<tag>${docker.tag}</tag>
-					<noCache>true</noCache>
-					<contextDirectory>/usr/src/app</contextDirectory>
 					<buildArgs>
 						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
 					</buildArgs>
 				</configuration>
-				<executions>
-					<execution>
-						<id>build-image</id>
-						<phase>install</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>push-image</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>push</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

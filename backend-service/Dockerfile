@@ -1,5 +1,5 @@
 FROM maven:3.6.1-jdk-11 AS build
-WORKDIR /usr/src/app
+WORKDIR /workspace/app
 COPY pom.xml .
 RUN mvn dependency:go-offline -B
 
@@ -7,12 +7,12 @@ COPY src ./src
 RUN mvn clean package
 
 FROM azul/zulu-openjdk-alpine:11.0.5
-VOLUME /tmp
 ARG JAR_FILE
-COPY --from=build /usr/src/app/target/${JAR_FILE} target
+COPY --from=build /workspace/app/target/${JAR_FILE} target
+RUN mkdir target/config
+VOLUME target/config
 
-ARG PORT=8080
-ENV EXPOSED_PORT=$ARG
-EXPOSE $EXPOSED_PORT
+EXPOSE 8080
+ENV JAVA_OPTS=""
 
-ENTRYPOINT exec java $JAVA_OPTS -jar /target/backend-service.jar
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar", "/target/$JAR_FILE"]
