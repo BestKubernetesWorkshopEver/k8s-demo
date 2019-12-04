@@ -17,14 +17,14 @@ public class FrontendConfiguration {
     @Data
     public static class Backend {
         @JsonProperty("workshop.backend.host")
-        private String url;
+        private String host;
         @JsonProperty("workshop.backend.port")
         private int port;
 
         @Override
         public String toString() {
             return
-                    " workshop.backend.host='" + url + '\'' +
+                    " workshop.backend.host='" + host + '\'' +
                             ", workshop.backend.port=" + port;
         }
     }
