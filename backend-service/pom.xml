@@ -19,9 +19,20 @@
 		<docker.repository>registry.hub.docker.com/k8sworkshopharman</docker.repository>
 		<docker.tag>latest</docker.tag>
 		<activation.version>1.1.1</activation.version>
+		<logback.version>1.2.3</logback.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>net.rakugakibox.spring.boot</groupId>
+			<artifactId>logback-access-spring-boot-starter</artifactId>
+			<version>2.7.1</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

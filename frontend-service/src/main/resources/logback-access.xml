@@ -1,0 +1,7 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS}  Access Log uri: %requestURL | status code: %statusCode | bytes: %bytesSent | elapsed time: %elapsedTime | request-log: %magenta(%requestContent) | response-log: %cyan(%responseContent)</pattern>
+        </encoder>    </appender>
+    <appender-ref ref="CONSOLE" />
+</configuration>
