@@ -40,7 +40,7 @@ spec:
             failureThreshold: 3
           env:
             - name: spring.data.mongodb.host
-              value: mongodb-service.default.svc.cluster.local
+              value: mongodb-service
             - name: JAVA_OPTS
               value: "-Xmx256m -Xms64m -Xss256k"
           ports:

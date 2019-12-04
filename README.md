@@ -1,4 +1,4 @@
-### Welcome to kubernetes workshop
+## Welcome to kubernetes workshop
 
 To start the application run following commands:
 * start mongodb
@@ -21,5 +21,15 @@ To start the application run following commands:
 ## Run on Minikube
 `minikube start --vm-driver=hyperv --memory='4000mb' --cpus=4`  
 `kubectl apply -f k8s`  
-`kubectl port-forward svc/frontend-service 8888:8888`  
-Access on http://localhost:8888
+Access frontend at http://<minikube_ip>:30000
+
+## Verification of each pod
+
+### Mongo
+`kubectl exec -it <mongo_pod_name> -- mongo --eval "db.adminCommand('ping')"`
+
+### Backend
+`kubectl exec -it <backend_pod_name> -- wget localhost:8080/actuator/health`
+
+### Frontend
+`kubectl exec -it <frontend_pod_name> -- wget localhost:8888/actuator/health`

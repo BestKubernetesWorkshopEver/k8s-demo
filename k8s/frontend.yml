@@ -39,10 +39,16 @@ spec:
             periodSeconds: 10
             failureThreshold: 3
           env:
-            - name: backend.url
-              value: backend-service.default.svc.cluster.local
-            - name: backend.port
-              value: "8080"
+            - name: workshop.backend.host
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-configmap
+                  key: backend.host
+            - name: workshop.backend.port
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-configmap
+                  key: backend.port
             - name: workshop.username
               valueFrom:
                 configMapKeyRef:
@@ -65,11 +71,13 @@ metadata:
   labels:
     run: frontend-service
 spec:
+  type: NodePort
   selector:
     app: frontend
   ports:
     - protocol: TCP
       port: 8888
+      nodePort: 30000
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -78,3 +86,5 @@ metadata:
 data:
   username: astronaut
   password: moon
+  backend.host: backend-service
+  backend.port: "8080"

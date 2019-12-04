@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@FeignClient(value = "backendService", url = "${workshop.backend.url}:${workshop.backend.port}")
+@FeignClient(value = "backendService", url = "${workshop.backend.host}:${workshop.backend.port}")
 public interface BackendService {
     @GetMapping(value = "api")
     @ResponseBody
