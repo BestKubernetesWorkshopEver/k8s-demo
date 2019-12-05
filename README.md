@@ -18,6 +18,25 @@ To start the application run following commands:
 ``java -jar backend-service/target/backend-service-0.0.1-SNAPSHOT.jar``
 
 
+
+## Docker images
+
+* build frontend docker image
+
+`` docker build -t k8sworkshopharman/frontend-service:latest .
+
+* build backend docker image
+
+`` docker build -t k8sworkshopharman/backend-service:latest .
+
+* pushing docker images to docker hub
+
+``mvn dockerfile:push ``
+
+* passing external application.properties to frontend and backend images can be done by mounting volume to /app/config
+
+``docker run -v /tmp/app:/app/config:ro <image>``
+
 ## Run on Minikube
 `minikube start --vm-driver=hyperv --memory='4000mb' --cpus=4`  
 `kubectl apply -f k8s`  

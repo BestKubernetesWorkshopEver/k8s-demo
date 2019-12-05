@@ -1,18 +1,20 @@
 FROM maven:3.6.1-jdk-11 AS build
-WORKDIR /workspace/app
+WORKDIR /workspace/build
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
+RUN mvn -B dependency:go-offline
 
 COPY src ./src
 RUN mvn clean package
 
 FROM azul/zulu-openjdk-alpine:11.0.5
-ARG JAR_FILE
-COPY --from=build /workspace/app/target/${JAR_FILE} target
-RUN mkdir target/config
-VOLUME target/config
-
 EXPOSE 8080
+ENV APP_HOME /app
 ENV JAVA_OPTS=""
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/config
+VOLUME $APP_HOME/config
 
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar", "/target/$JAR_FILE"]
+WORKDIR $APP_HOME
+
+COPY --from=build /workspace/build/target/*.jar app.jar
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

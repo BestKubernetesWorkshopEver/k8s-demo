@@ -1,16 +1,21 @@
 FROM maven:3.6.1-jdk-11 AS build
-WORKDIR /workspace/app
+WORKDIR /workspace/build
 COPY pom.xml .
-RUN mvn -B dependency:resolve dependency:resolve-plugins
+RUN mvn -B dependency:go-offline
 
 COPY src ./src
 COPY frontend ./frontend
 RUN mvn clean package
 
 FROM azul/zulu-openjdk-alpine:11.0.5
-ARG JAR_FILE
-COPY --from=build /workspace/app/target/${JAR_FILE} target
-
 EXPOSE 8888
+ENV APP_HOME /app
+ENV JAVA_OPTS=""
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/config
+VOLUME $APP_HOME/config
 
-ENTRYPOINT ["java", "-jar", "/target/frontend-service.jar"]
+WORKDIR $APP_HOME
+
+COPY --from=build /workspace/build/target/*.jar app.jar
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
