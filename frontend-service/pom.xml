@@ -137,9 +137,6 @@
                 <configuration>
                     <repository>${docker.repository}/${project.artifactId}</repository>
                     <tag>${docker.tag}</tag>
-                    <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
                 </configuration>
             </plugin>
             <plugin>
