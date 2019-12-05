@@ -104,6 +104,7 @@
 				<configuration>
 					<repository>${docker.repository}/${project.artifactId}</repository>
 					<tag>${docker.tag}</tag>
+					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 				</configuration>
 			</plugin>
 		</plugins>
