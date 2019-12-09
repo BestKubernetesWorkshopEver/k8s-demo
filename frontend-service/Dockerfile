@@ -10,7 +10,7 @@ RUN mvn clean package
 FROM azul/zulu-openjdk-alpine:11.0.5
 EXPOSE 8888
 ENV APP_HOME /app
-ENV JAVA_OPTS=""
+ENV JAVA_OPTS="-Xmx256m"
 RUN mkdir $APP_HOME
 RUN mkdir $APP_HOME/config
 VOLUME $APP_HOME/config
