@@ -16,6 +16,7 @@ public class FilterConfiguration {
         final FilterRegistrationBean filterRegBean = new FilterRegistrationBean();
         TeeFilter filter = new TeeFilter();
         filterRegBean.setFilter(filter);
+        filterRegBean.setUrlPatterns(Arrays.asList("/api"));
         filterRegBean.setAsyncSupported(Boolean.TRUE);
         filterRegBean.setName("Request Response Filter");
         return filterRegBean;
